@@ -36,6 +36,8 @@ export function pitch(request) {
 
   const cb = this.async();
 
+  const query = request.indexOf('?') >= 0 ? loaderUtils.parseQuery(request.slice(request.indexOf('?'), request.length)) || {} : {};
+
   const filename = loaderUtils.interpolateName(this, options.name || '[hash].worker.js', {
     context: options.context || this.options.context,
     regExp: options.regExp,
@@ -44,7 +46,7 @@ export function pitch(request) {
   const worker = {};
 
   worker.options = {
-    filename,
+    filename: `${query.context || ''}${filename}`,
     chunkFilename: `[id].${filename}`,
     namedChunkFilename: null,
   };
