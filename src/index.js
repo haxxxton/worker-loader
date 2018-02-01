@@ -38,7 +38,7 @@ export function pitch(request) {
 
   const query = request.indexOf('?') >= 0 ? loaderUtils.parseQuery(request.slice(request.indexOf('?'), request.length)) || {} : {};
 
-  const filename = loaderUtils.interpolateName(this, options.name || '[hash].worker.js', {
+  const filename = loaderUtils.interpolateName(this, query.name || options.name || '[hash].worker.js', {
     context: options.context || this.options.context,
     regExp: options.regExp,
   });
